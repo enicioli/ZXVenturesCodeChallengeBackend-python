@@ -1,0 +1,23 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    container_name: ZXVenturesCodeChallengeBackend-python-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+  app:
+    build: .
+    container_name: ZXVenturesCodeChallengeBackend-python-app
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongo
+    environment:
+      ENVIRONMENT: development
+      MONGO_HOST: mongo
+      MONGO_USER: root
+      MONGO_PASSWORD: root
+      MONGO_DB: code-challenge
